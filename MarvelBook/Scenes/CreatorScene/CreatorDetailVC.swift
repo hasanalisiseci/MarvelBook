@@ -167,7 +167,7 @@ class CreatorDetailVC: UIViewController, UICollectionViewDataSource, UICollectio
     private func fetchCreator() {
         LoadingManager.shared.visible()
         guard let id = comic?.creators.items.first?.id else { return }
-        let endpoint = Endpoint.creators(creatorId: id) // Endpoint'i tanımlayın
+        let endpoint = Endpoint.creators(creatorId: id)
         APIService.shared.request(endpoint: endpoint) { (result: Result<MarvelResponse<Creator>, Error>) in
             switch result {
             case .success(let response):
@@ -212,15 +212,15 @@ class CreatorDetailVC: UIViewController, UICollectionViewDataSource, UICollectio
         case comicsCollectionView:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.ComicsCell.rawValue, for: indexPath) as! InfoCell
             let comic = creator?.comics.items[indexPath.row]
-            cell.configure(with: comic?.name ?? "Unknown Comic", borderColor: .red) // Comics için kırmızı border
+            cell.configure(with: comic?.name ?? "Unknown Comic", borderColor: .red)
         case seriesCollectionView:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.SeriesCell.rawValue, for: indexPath) as! InfoCell
             let series = creator?.series.items[indexPath.row]
-            cell.configure(with: series?.name ?? "Unknown Series", borderColor: .green) // Series için yeşil border
+            cell.configure(with: series?.name ?? "Unknown Series", borderColor: .green)
         case storiesCollectionView:
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.StoriesCell.rawValue, for: indexPath) as! InfoCell
             let story = creator?.stories.items[indexPath.row]
-            cell.configure(with: story?.name ?? "Unknown Story", borderColor: .blue) // Stories için mavi border
+            cell.configure(with: story?.name ?? "Unknown Story", borderColor: .blue)
         default:
             fatalError("Unexpected collection view")
         }
